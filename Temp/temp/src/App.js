@@ -40,6 +40,38 @@ var problem1 = function() {
   return businesses;
 };
 
+// var problem2 = function() {
+//   let initialDis = visitors / businesses.length;
+//   for (let i = 0; i < businesses.length; i++) {
+//     businesses[i] = initialDis;
+//   }
+
+//   let index = parseInt(prompt("Enter index: "));
+//   var extraVisiter = parseInt(prompt("Enter extra Visitors: "));
+//   if (extraVisiter < 10) {
+//     businesses[index] += extraVisiter;
+//     return businesses;
+//   } else {
+//     businesses[index] += 10;
+//     extraVisiter -= 10;
+//     let atLeast = Math.round(extraVisiter / businesses.length);
+//     var extra = extraVisiter - (atLeast * businesses.length)
+//     for (let j = 0; j < businesses.length; j++) {
+//         if (extra < 0) {
+//             if (j != index) {
+//               businesses[j] -= 1;
+//               extra += 1; 
+//             }
+//         } else if (extra > 0) {
+//             businesses[j] += 1;
+//             extra -= 1;
+//         }
+//         businesses[j] += atLeast;
+//     }
+//   }
+//   return businesses;
+// }
+
 var problem2 = function() {
   let initialDis = visitors / businesses.length;
   for (let i = 0; i < businesses.length; i++) {
@@ -48,26 +80,30 @@ var problem2 = function() {
 
   let index = parseInt(prompt("Enter index: "));
   var extraVisiter = parseInt(prompt("Enter extra Visitors: "));
-  if (extraVisiter < 10) {
-    businesses[index] += extraVisiter;
-    return businesses;
-  } else {
-    businesses[index] += 10;
-    extraVisiter -= 10;
-    let atLeast = Math.round(extraVisiter / businesses.length);
-    var extra = extraVisiter - (atLeast * businesses.length)
-    for (let j = 0; j < businesses.length; j++) {
-        if (extra < 0) {
-            if (j != index) {
-              businesses[j] -= 1;
-              extra += 1; 
-            }
-        } else if (extra > 0) {
-            businesses[j] += 1;
-            extra -= 1;
-        }
-        businesses[j] += atLeast;
+
+  if (businesses[index] < 10) {
+    const numForTen = 10 - businesses[index];
+    if (numForTen < extraVisiter) {
+      extraVisiter -= numForTen;
+      businesses[index] += numForTen;
+    } else {
+      businesses += extraVisiter;
+      return businesses;
     }
+  }
+  let atLeast = Math.round(extraVisiter / businesses.length);
+  var extra = extraVisiter - (atLeast * businesses.length);
+  for (let j = 0; j < businesses.length; j++) {
+    if (extra < 0) {
+        if (j != index) {
+          businesses[j] -= 1;
+          extra += 1; 
+        }
+    } else if (extra > 0) {
+        businesses[j] += 1;
+        extra -= 1;
+    }
+    businesses[j] += atLeast;
   }
   return businesses;
 }
