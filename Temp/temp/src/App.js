@@ -71,13 +71,8 @@ var problem1 = function() {
 //   }
 //   return businesses;
 // }
-
+var start = 0;
 var problem2 = function() {
-  let initialDis = visitors / businesses.length;
-  for (let i = 0; i < businesses.length; i++) {
-    businesses[i] = initialDis;
-  }
-
   let index = parseInt(prompt("Enter index: "));
   var extraVisiter = parseInt(prompt("Enter extra Visitors: "));
 
@@ -91,25 +86,43 @@ var problem2 = function() {
       return businesses;
     }
   }
-  let atLeast = Math.round(extraVisiter / businesses.length);
-  var extra = extraVisiter - (atLeast * businesses.length);
-  for (let j = 0; j < businesses.length; j++) {
-    if (extra < 0) {
-        if (j != index) {
-          businesses[j] -= 1;
-          extra += 1; 
-        }
-    } else if (extra > 0) {
-        businesses[j] += 1;
-        extra -= 1;
+  // let atLeast = Math.round(extraVisiter / businesses.length);
+  // var extra = extraVisiter - (atLeast * businesses.length);
+  // for (let j = 0; j < businesses.length; j++) {
+  //   if (extra < 0) {
+  //       if (j != index) {
+  //         businesses[j] -= 1;
+  //         extra += 1; 
+  //       }
+  //   } else if (extra > 0) {
+  //       businesses[j] += 1;
+  //       extra -= 1;
+  //   }
+  //   businesses[j] += atLeast;
+  // }
+  while(extraVisiter > 0) {
+    businesses[start] += 1;
+    extraVisiter -= 1;
+    start += 1;
+    if (start > businesses.length) {
+      start = 0;
     }
-    businesses[j] += atLeast;
   }
-  return businesses;
+  console.log(businesses)
 }
 
 function App() {
-  console.log(problem2());
+  let initialDis = visitors / businesses.length;
+  for (let i = 0; i < businesses.length; i++) {
+    businesses[i] = initialDis;
+  }
+  return (
+    <div>
+      <button
+        onClick={problem2}
+      >Problem 2</button>
+    </div>
+  );
 }
 
 export default App;
