@@ -35,8 +35,6 @@ var searchMatrix = function(matrix, target) {
         var end = matrix[row].length;
         while (start <= end && !isFound) {
             const pivot = Math.floor((start + end) / 2);
-            console.log(pivot)
-            console.log(matrix[row][pivot])
             if (matrix[row][pivot] > target) {
                 end = pivot - 1;
             } else if (matrix[row][pivot] < target) {
