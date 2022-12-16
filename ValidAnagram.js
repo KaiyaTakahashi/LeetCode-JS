@@ -1,4 +1,7 @@
 var isAnagram = function(s, t) {
+    if(s.length != t.length) {
+        return false
+    }
     var dict = {}
     for (let i = 0; i < s.length; i++) {
         if (dict[s[i]] == undefined) {
