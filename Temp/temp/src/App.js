@@ -82,19 +82,6 @@ var problem1 = function() {
 //   return businesses;
 // }
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 function App() {
@@ -105,6 +92,10 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if (data.get('index') == '' || data.get('extraVisitor') == '') {
+      console.log("invalid input")
+      return
+    }
     problem2(parseInt(data.get('index')), parseInt(data.get('extraVisitor')));
   };
 
@@ -112,8 +103,6 @@ function App() {
   var problem2 = function(i, e) {
     let index = i;
     var extraVisiter = e;
-    console.log("problem2")
-    console.log(businesses[index] < 10)
     if (businesses[index] < 10) {
       const numForTen = 10 - businesses[index];
       if (numForTen < extraVisiter) {
@@ -128,17 +117,15 @@ function App() {
     let atLeast = Math.round(extraVisiter / businesses.length);
     var extra = extraVisiter - (atLeast * businesses.length);
     if (extraVisiter < businesses.length) {
-      console.log("first one")
       while(extraVisiter > 0) {
         businesses[start] += 1;
         extraVisiter -= 1;
         start += 1;
-        if (start > businesses.length) {
+        if (start == businesses.length) {
           start = 0;
         }
       }
     } else {
-      console.log("second one")
       for (let j = 0; j < businesses.length; j++) {
         if (extra < 0) {
             if (j != index) {
