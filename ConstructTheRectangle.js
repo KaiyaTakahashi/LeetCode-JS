@@ -1,5 +1,5 @@
 var constructRectangle = function(area) {
-    var largest = Math.floor(area / 2);
+    var largest = Math.floor(Math.sqrt(area));
     var ans = [1, area];
     if (area == 1) {
         return [1, 1];
